@@ -1,0 +1,73 @@
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+  <div id="chart-container">
+    <canvas id="visitsChart"></canvas>
+    <canvas id="commitsChart"></canvas>
+  </div>
+</body>
+<script>
+    // Define your GitHub username and repository name
+    const username = "Homemade-Cookies";
+    const repo = "analyticsy";
+
+    // Fetch data for visits
+    axios.get(`https://api.github.com/repos/${username}/${repo}/traffic/views`)
+        .then(function (response) {
+            const visitsData = response.data.views;
+            // Process data and create a chart
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+
+    // Fetch data for commits
+    axios.get(`https://api.github.com/repos/${username}/${repo}/commits`)
+        .then(function (response) {
+            const commitsData = response.data.length;
+            // Process data and create a chart
+        })
+        .catch(function (error) {
+            console.error(error);
+        });
+</script>
+<script>
+    // Create a line chart for visits
+    var visitsCtx = document.getElementById('visitsChart').getContext('2d');
+    var visitsChart = new Chart(visitsCtx, {
+        type: 'line',
+        data: {
+            labels: /* Labels for visits */,
+            datasets: [{
+                label: 'Visits',
+                data: /* Visits data */,
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            /* Chart options */
+        }
+    });
+
+    // Create a bar chart for commits
+    var commitsCtx = document.getElementById('commitsChart').getContext('2d');
+    var commitsChart = new Chart(commitsCtx, {
+        type: 'bar',
+        data: {
+            labels: /* Labels for commits */,
+            datasets: [{
+                label: 'Commits',
+                data: /* Commits data */,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            /* Chart options */
+        }
+    });
+</script>
